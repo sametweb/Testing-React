@@ -14,7 +14,6 @@ export default function StarWarsCharacters() {
     setIsLoading(true);
     const getCharacters = async () => {
       const characters = await getData(url);
-      console.log(characters);
       setNext(characters.next);
       setPrevious(characters.previous);
       setCharacters(characters.results);
@@ -46,15 +45,17 @@ export default function StarWarsCharacters() {
       ) : (
         <>
           {characters.map(character => (
-            <div key={character.url}>{character.name}</div>
+            <div key={character.url} title="character">
+              {character.name}
+            </div>
           ))}
         </>
       )}
       <div className="buttons">
-        <button onClick={goToPrevious} disabled={!previous}>
+        <button data-testid="prev" onClick={goToPrevious} disabled={!previous}>
           Previous
         </button>
-        <button onClick={goToNext} disabled={!next}>
+        <button data-testid="next" onClick={goToNext} disabled={!next}>
           Next
         </button>
       </div>
